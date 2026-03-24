@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+/* ─── Dark mode: class-based via .dark on <html> ─────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design Tokens — Light Mode ────────────────────────────── */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f7ff;
+  --bg-tertiary: #f0eeff;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --accent-primary: #6c47ff;
+  --accent-secondary: #a78bfa;
+  --accent-glow: rgba(108, 71, 255, 0.15);
+  --text-primary: #0f0a1e;
+  --text-secondary: #4a4560;
+  --text-muted: #9891b0;
+  --border-color: rgba(108, 71, 255, 0.12);
+  --shadow-sm: 0 2px 8px rgba(108, 71, 255, 0.08);
+  --shadow-md: 0 8px 32px rgba(108, 71, 255, 0.12);
+  --shadow-lg: 0 20px 60px rgba(108, 71, 255, 0.18);
+  --timeline-line: #e0d9ff;
+}
+
+/* ─── Design Tokens — Dark Mode ─────────────────────────────── */
+.dark {
+  --bg-primary: #0a0812;
+  --bg-secondary: #110e1f;
+  --bg-tertiary: #1a1530;
+  --bg-glass: rgba(17, 14, 31, 0.8);
+  --accent-primary: #8b6fff;
+  --accent-secondary: #c4b5fd;
+  --accent-glow: rgba(139, 111, 255, 0.2);
+  --text-primary: #f0ecff;
+  --text-secondary: #b8afd4;
+  --text-muted: #6b6385;
+  --border-color: rgba(139, 111, 255, 0.15);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --timeline-line: #2a2245;
+}
+
+/* ─── Tailwind v4 Theme Extension ───────────────────────────── */
+@theme {
+  /* Accent color palette */
+  --color-accent-50: #f3f0ff;
+  --color-accent-100: #e9e3ff;
+  --color-accent-200: #d4c9ff;
+  --color-accent-300: #b8a8ff;
+  --color-accent-400: #9a83ff;
+  --color-accent-500: #6c47ff;
+  --color-accent-600: #5a35ee;
+  --color-accent-700: #4a26d4;
+  --color-accent-800: #3b1cb0;
+  --color-accent-900: #2d1488;
+
+  /* Custom animations */
+  --animate-fadeSlideUp: fadeSlideUp 0.4s ease forwards;
+  --animate-fadeSlideIn: fadeSlideIn 0.4s ease forwards;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.5s linear infinite;
+  --animate-ripple: ripple 0.6s ease forwards;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-voice-wave: voice-wave 0.8s ease-in-out infinite alternate;
+  --animate-typing-dot: typing-dot 1.2s ease-in-out infinite;
+
+  /* Backdrop blur */
+  --blur-xs: 2px;
+
+  /* Font */
+  --font-sans: var(--font-geist-sans), "Geist", system-ui, sans-serif;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 12px var(--accent-glow);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% center;
+  }
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes voice-wave {
+  from {
+    transform: scaleY(0.3);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes typing-dot {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* ─── Global Styles ──────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-primary);
+  border-radius: 9999px;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--accent-glow);
+  color: var(--text-primary);
+}
